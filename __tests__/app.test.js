@@ -4,7 +4,8 @@ import request from 'supertest';
 import app from '../lib/app.js';
 import { formatQuote } from '../lib/utils/utils.js';
 import quoteData from '../data/quoteData.js';
-import Quote from '../models/Quote.js';
+import Quote from '../lib/models/Quote.js';
+// import { jest } from '@jest/globals';
 
 const testQuoteAndAuthor = 'A theatre is the most important sort of house in the world, because that\'s where people are shown what they could be if they wanted, and what they\'d like to be if they dared to and what they really are - Tove Jansson';
 
@@ -22,15 +23,16 @@ describe('quote API munging', () => {
 
 describe('demo routes', () => {
   beforeEach(async () => {
+    // jest.useFakeTimers();
     return setup(pool);
   });
 
   it('adds a new quote to the database and sends a text message', async () => {
     const res = await request(app)
       .post('/api/v1/quotes')
-      .send({ quote: testQuoteAndAuthor });
+      .send({ quote: Quote.quote });
 
-    expect(res.body).toEqual({ id: '1', quote: testQuoteAndAuthor });
+    expect(res.body.quote).toEqual(expect.any(String));
   });
 
   it('gets a quote by id via GET', async () => {
