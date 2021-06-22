@@ -28,9 +28,9 @@ describe('demo routes', () => {
   it('adds a new quote to the database and sends a text message', async () => {
     const res = await request(app)
       .post('/api/v1/quotes')
-      .send({ quote: testQuoteAndAuthor });
+      .send({ quote: Quote.quote });
 
-    expect(res.body).toEqual({ id: '1', quote: testQuoteAndAuthor });
+    expect(res.body.quote).toEqual(expect.any(String));
   });
 
   it('gets a quote by id via GET', async () => {
