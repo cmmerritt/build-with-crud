@@ -15,3 +15,18 @@ describe('quote API munging', () => {
     expect(actual).toEqual(expected);
   });
 });
+
+describe('demo routes', () => {
+  beforeEach(async () => {
+    return setup(pool);
+  });
+
+  it('adds a new quote to the database and sends a text message', async () => {
+    const res = await request(app)
+      .post('/api/v1/quotes')
+      .send({ quote: testQuote });
+
+    expect(res.body).toEqual({ id: '1', quote: testQuote });
+  });
+});
+
