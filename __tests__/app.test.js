@@ -14,7 +14,7 @@ const testShotsQuote = 'You miss 100% of the shots you don\'t take - Wayne Gretz
 const notAQuote = 'This is not a quote - Nobody';
 
 describe('quote API munging', () => {
-  it('munges quote', async () => {
+  it('munges quote', () => {
     const expected = testQuoteAndAuthor;
     const actual = formatQuote(quoteData);
     expect(actual).toEqual(expected);
@@ -22,7 +22,7 @@ describe('quote API munging', () => {
 });
 
 describe('demo routes', () => {
-  beforeEach(async () => {
+  beforeEach(() => {
     // jest.useFakeTimers();
     return setup(pool);
   });
